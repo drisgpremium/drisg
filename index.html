@@ -68,16 +68,27 @@ footer{border-top:1px solid rgba(255,255,255,.07);padding:35px 0 55px;color:#708
     data._template='table';
     data._captcha='false';
     try{
-      const r=await fetch('https://formsubmit.co/ajax/drisgpremium@gmail.com',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify(data)});
-      const j=await r.json().catch(()=>({success:false}));
-      if(r.ok && (j.success===true || j.success==='true')){
+      const r=await fetch('https://formsubmit.co/ajax/drisgpremium@gmail.com',{
+        method:'POST',
+        headers:{'Accept':'application/json','Content-Type':'application/json'},
+        body:JSON.stringify(data),
+        mode:'cors'
+      });
+      const text=await r.text();
+      let j={};
+      try{ j=JSON.parse(text); }catch(_){}
+      if(r.ok){
         status.className='status ok';
-        status.textContent='Talebiniz başarıyla gönderildi. En kısa sürede sizinle iletişime geçeceğiz.';
+        status.textContent=(j.message || '').toLowerCase().includes('activate')
+          ? 'Talebiniz alındı. İlk kullanım için e-posta adresinize gelen FormSubmit aktivasyon bağlantısını onaylamanız gerekebilir.'
+          : 'Talebiniz başarıyla gönderildi. En kısa sürede sizinle iletişime geçeceğiz.';
         form.reset();
-      }else{throw new Error('send');}
+      }else{
+        throw new Error('HTTP '+r.status);
+      }
     }catch(err){
       status.className='status err';
-      status.textContent='Gönderim başarısız oldu. Lütfen tekrar deneyin veya drisgpremium@gmail.com adresine doğrudan e-posta gönderin.';
+      status.textContent='Form servisine ulaşılamadı. Lütfen tekrar deneyin veya drisgpremium@gmail.com adresine doğrudan e-posta gönderin.';
     }finally{
       submit.disabled=false; submit.textContent='Lisans Talebi Gönder ↗';
     }
