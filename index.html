@@ -126,6 +126,22 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:35px 0 50px;color:#718
  .step:not(:last-child){border-right:0}.darkcard,.cta,.store-card{padding:26px;border-radius:23px}.dashboard{padding:11px;border-radius:22px}
  .bubble{display:none}.qr-card{grid-template-columns:1fr;text-align:center}.qr-card #qrcode{margin:auto}section{padding:67px 0}
 }
+
+.real-showcase{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px}
+.real-shot{border:1px solid var(--line);border-radius:25px;background:linear-gradient(145deg,#10243a,#07111d);padding:10px;box-shadow:var(--shadow);overflow:hidden}
+.real-shot img{display:block;width:100%;height:470px;object-fit:cover;object-position:top;border-radius:18px}
+.real-shot figcaption{padding:13px 7px 5px;font-size:12px;color:#cbd9e6;font-weight:800}
+.real-shot small{display:block;color:#7890a8;font-weight:500;margin-top:3px}
+.privacy-note{margin-top:13px;color:#6f879d;font-size:10px;text-align:center}
+.free-banner{margin-top:28px;border:1px solid rgba(82,224,164,.2);background:rgba(82,224,164,.05);border-radius:20px;padding:18px 20px;display:flex;justify-content:space-between;gap:20px;align-items:center}
+.free-banner strong{font-size:15px}.free-banner span{color:#8fa5b9;font-size:12px}
+.license{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px}
+.license-card{border:1px solid var(--line);border-radius:28px;padding:30px;background:linear-gradient(145deg,rgba(15,37,60,.85),rgba(5,14,25,.9))}
+.license-card h3{margin:0 0 9px;font-size:25px}.license-card p{color:var(--muted);font-size:13px}
+.form{display:grid;gap:10px;margin-top:20px}.form input{width:100%;border:1px solid rgba(170,220,255,.15);background:#081624;color:#f4f9ff;border-radius:13px;padding:13px 14px;font:inherit;outline:none}.form input:focus{border-color:rgba(57,231,244,.55)}
+.license-points{display:grid;gap:12px;margin-top:20px}.license-points div{display:flex;gap:10px;font-size:13px;color:#d5e4ef}.license-points b{color:var(--green)}
+@media(max-width:900px){.real-showcase{grid-template-columns:1fr 1fr}.license{grid-template-columns:1fr}}
+@media(max-width:580px){.real-showcase{grid-template-columns:1fr 1fr}.real-shot img{height:360px}.free-banner{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
 <body>
@@ -133,7 +149,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:35px 0 50px;color:#718
   <div class="wrap nav">
     <a class="brand" href="#"><img src="assets/app-icon.jpg" alt="Dr. İSG"><span>Dr. İSG</span></a>
     <div class="navlinks">
-      <a href="#ozellikler">Özellikler</a><a href="#ekran">Deneyim</a><a href="#indirme">İndirme</a><a href="#sss">SSS</a>
+      <a href="#uygulama">Uygulama</a><a href="#ozellikler">Özellikler</a><a href="#ekran">Deneyim</a><a href="#indirme">İndirme</a><a href="#sss">SSS</a>
     </div>
     <a class="btn primary" href="Dr-ISG.apk" download>APK'yı İndir ↓</a>
   </div>
@@ -187,6 +203,17 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:35px 0 50px;color:#718
   </div>
 </section>
 
+<section id="uygulama" class="wrap">
+  <div class="center"><div class="kicker">Gerçek uygulama</div><h2 class="section-title">Dr. İSG'yi sadece anlatmıyoruz. Size gösteriyoruz.</h2><p class="section-copy">Aşağıdaki ekranlar uygulamanın gerçek kullanım akışından alınmıştır. Tanıtım alanında kişisel veya özel bilgiler kullanılmamıştır.</p></div>
+  <div class="real-showcase">
+    <figure class="real-shot"><img src="assets/screen-home.jpg" alt="Dr. İSG ana sayfa ekranı"><figcaption>Ana Sayfa<small>İşyeri, puantaj, denetim ve görev takibi</small></figcaption></figure>
+    <figure class="real-shot"><img src="assets/screen-service.jpg" alt="Dr. İSG yeni hizmet girişi ekranı"><figcaption>Yeni Hizmet Girişi<small>Kurum, tarih, hizmet süresi ve yapılan İSG hizmeti</small></figcaption></figure>
+    <figure class="real-shot"><img src="assets/screen-equipment.jpg" alt="Dr. İSG ekipman ekleme ekranı"><figcaption>Ekipman Yönetimi<small>Ekipman kayıtlarını kurum bazında takip edin</small></figcaption></figure>
+    <figure class="real-shot"><img src="assets/screen-medical.jpg" alt="Dr. İSG muayene kaydı ekranı"><figcaption>Sağlık Gözetimi<small>Muayene kayıtlarını düzenli şekilde yönetin</small></figcaption></figure>
+  </div>
+  <div class="privacy-note">Tanıtım görsellerinde kişisel iletişim bilgileri, gerçek kişi bilgileri ve özel kayıtlar kullanılmamıştır.</div>
+</section>
+
 <section id="ozellikler" class="wrap">
   <div class="center"><div class="kicker">Modüler yapı</div><h2 class="section-title">İSG işinizin farklı parçaları değil, tek çalışma sistemi.</h2><p class="section-copy">APK içindeki mevcut çalışma alanlarını, satış odaklı ama abartısız bir ürün deneyimi içinde öne çıkarıyoruz.</p></div>
   <div class="feature-grid">
@@ -230,6 +257,10 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:35px 0 50px;color:#718
   </div>
 </section>
 
+<section class="wrap">
+  <div class="free-banner"><div><strong>Ücretsiz başlayın.</strong><span> Sınırlı raporlama özellikleriyle Dr. İSG'yi deneyin; lisans ihtiyacınız olduğunda bize ulaşın.</span></div><a class="btn primary" href="#lisans">Lisans Talep Et</a></div>
+</section>
+
 <section id="indirme" class="wrap">
   <div class="center"><div class="kicker">İndirme &amp; erişim</div><h2 class="section-title">Android hazır. Google Play alanı şimdiden hazır.</h2><p class="section-copy">APK bugün indirilebilir; Google Play bağlantısı yayınlandığında aynı alan tek tıklamayla mağazaya dönüşecek.</p></div>
   <div class="store-grid">
@@ -262,6 +293,14 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:35px 0 50px;color:#718
     <div class="step"><div class="stepnum">02 / DEĞERLENDİR</div><h3>Risk &amp; denetim</h3><p>Riskleri, denetimleri ve saha kayıtlarını işle.</p></div>
     <div class="step"><div class="stepnum">03 / TAKİP ET</div><h3>Aksiyonları yönet</h3><p>Uygunsuzluk ve görevleri takipte tut.</p></div>
     <div class="step"><div class="stepnum">04 / RAPORLA</div><h3>Çıktını oluştur</h3><p>PDF / Excel çıktılarıyla süreci belgele.</p></div>
+  </div>
+</section>
+
+<section id="lisans" class="wrap">
+  <div class="center"><div class="kicker">Lisanslama</div><h2 class="section-title">İhtiyacınız büyüdüğünde lisans talep edin.</h2><p class="section-copy">Şimdilik doğrudan online ödeme yok. Lisans isteyen kullanıcılar ad-soyad ve telefon bilgileriyle e-posta üzerinden iletişime geçebilir.</p></div>
+  <div class="license">
+    <div class="license-card"><h3>Lisans talebi</h3><p>Bilgilerinizi hazırlayın; lisans seçenekleri ve aktivasyon için sizinle iletişime geçelim.</p><div class="form"><input placeholder="Ad Soyad" aria-label="Ad Soyad"><input placeholder="Telefon" aria-label="Telefon"><input placeholder="E-posta" aria-label="E-posta"><a class="btn primary" href="#lisans">E-posta ile Lisans Talebi</a></div></div>
+    <div class="license-card"><span class="badge">Ücretsiz kullanım</span><h3>Önce deneyin, sonra lisanslayın.</h3><div class="license-points"><div><b>✓</b><span>Uygulamayı Android cihazınızda deneyin.</span></div><div><b>✓</b><span>Sınırlı raporlama özellikleri ücretsiz sunulur.</span></div><div><b>✓</b><span>Lisans gerektiğinde ad-soyad ve telefon bilgilerinizle başvurun.</span></div><div><b>✓</b><span>Google Play yayınlandığında mağaza üzerinden de erişim sağlanacak.</span></div></div></div>
   </div>
 </section>
 
