@@ -1,1459 +1,603 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#03060c">
-
-  <title>Dr. İSG | Dijital İş Güvenliği Yönetim Sistemi</title>
-
-  <meta
-    name="description"
-    content="Dr. İSG – işletmeler için dijital iş sağlığı ve güvenliği yönetim sistemi. İSG süreçlerinizi tek platformdan yönetin."
-  >
-
-  <style>
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    :root{
-      --bg:#03060c;
-      --bg2:#07111f;
-      --panel:rgba(12,23,39,.72);
-      --line:rgba(185,220,255,.14);
-      --text:#f7fbff;
-      --muted:#98aabd;
-      --cyan:#35e5f4;
-      --blue:#6689ff;
-      --green:#56dfaa;
-      --gold:#ffc76f;
-      --r:28px;
-      --shadow:0 35px 100px rgba(0,0,0,.5);
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      font-family:Inter,Segoe UI,Arial,sans-serif;
-      background:
-        radial-gradient(circle at 15% 10%,rgba(53,229,244,.10),transparent 28%),
-        radial-gradient(circle at 85% 20%,rgba(102,137,255,.12),transparent 30%),
-        linear-gradient(180deg,var(--bg),var(--bg2));
-      color:var(--text);
-      min-height:100vh;
-      overflow-x:hidden;
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    img{
-      max-width:100%;
-      display:block;
-    }
-
-    button,
-    input,
-    textarea{
-      font:inherit;
-    }
-
-    .container{
-      width:min(1180px,calc(100% - 32px));
-      margin:auto;
-    }
-
-    /* NAV */
-
-    nav{
-      position:sticky;
-      top:0;
-      z-index:100;
-      backdrop-filter:blur(20px);
-      background:rgba(3,6,12,.72);
-      border-bottom:1px solid var(--line);
-    }
-
-    .nav-inner{
-      min-height:78px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-weight:900;
-      letter-spacing:-.5px;
-    }
-
-    .brand img{
-      width:44px;
-      height:44px;
-      border-radius:13px;
-      object-fit:cover;
-      box-shadow:0 10px 35px rgba(53,229,244,.15);
-    }
-
-    .brand span{
-      font-size:19px;
-    }
-
-    .nav-links{
-      display:flex;
-      align-items:center;
-      gap:24px;
-      color:var(--muted);
-      font-size:14px;
-      font-weight:700;
-    }
-
-    .nav-links a:hover{
-      color:#fff;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:9px;
-      min-height:48px;
-      padding:0 20px;
-      border-radius:15px;
-      border:1px solid var(--line);
-      font-weight:800;
-      cursor:pointer;
-      transition:.25s ease;
-    }
-
-    .btn:hover{
-      transform:translateY(-2px);
-    }
-
-    .btn.primary{
-      color:#021015;
-      background:linear-gradient(135deg,var(--cyan),#86f4ff);
-      border-color:transparent;
-      box-shadow:0 14px 35px rgba(53,229,244,.18);
-    }
-
-    .btn.secondary{
-      background:rgba(255,255,255,.04);
-      color:#fff;
-    }
-
-    /* HERO */
-
-    .hero{
-      padding:90px 0 60px;
-      position:relative;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.08fr .92fr;
-      align-items:center;
-      gap:55px;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:9px;
-      padding:8px 13px;
-      border:1px solid rgba(53,229,244,.2);
-      background:rgba(53,229,244,.06);
-      color:var(--cyan);
-      border-radius:999px;
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:.6px;
-      margin-bottom:22px;
-    }
-
-    .dot{
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:var(--green);
-      box-shadow:0 0 14px var(--green);
-    }
-
-    h1{
-      font-size:clamp(44px,6vw,78px);
-      line-height:.96;
-      letter-spacing:-4px;
-      margin-bottom:25px;
-    }
-
-    h1 span{
-      background:linear-gradient(135deg,#fff,var(--cyan),#9aaeff);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .hero-text{
-      max-width:670px;
-      color:var(--muted);
-      font-size:18px;
-      line-height:1.75;
-      margin-bottom:30px;
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-bottom:28px;
-    }
-
-    .trust{
-      display:flex;
-      flex-wrap:wrap;
-      gap:18px;
-      color:#b9c9d8;
-      font-size:13px;
-    }
-
-    .trust span{
-      display:flex;
-      align-items:center;
-      gap:7px;
-    }
-
-    .trust b{
-      color:var(--green);
-    }
-
-    /* APP SHOWCASE */
-
-    .phone-wrap{
-      position:relative;
-    }
-
-    .phone-glow{
-      position:absolute;
-      inset:15% 8%;
-      background:radial-gradient(circle,rgba(53,229,244,.22),transparent 62%);
-      filter:blur(30px);
-    }
-
-    .phone{
-      position:relative;
-      width:min(390px,100%);
-      margin:auto;
-      padding:10px;
-      border-radius:38px;
-      background:linear-gradient(145deg,#18283b,#05090f);
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:var(--shadow);
-      transform:rotate(1.5deg);
-    }
-
-    .phone img{
-      width:100%;
-      border-radius:29px;
-    }
-
-    /* SECTIONS */
-
-    section{
-      padding:90px 0;
-    }
-
-    .section-head{
-      max-width:760px;
-      margin-bottom:40px;
-    }
-
-    .section-kicker{
-      color:var(--cyan);
-      font-weight:900;
-      font-size:13px;
-      letter-spacing:1px;
-      text-transform:uppercase;
-      margin-bottom:12px;
-    }
-
-    h2{
-      font-size:clamp(32px,4vw,52px);
-      line-height:1.05;
-      letter-spacing:-2px;
-      margin-bottom:15px;
-    }
-
-    .section-head p{
-      color:var(--muted);
-      line-height:1.75;
-      font-size:16px;
-    }
-
-    /* FEATURES */
-
-    .features{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-    }
-
-    .card{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:var(--r);
-      padding:28px;
-      box-shadow:0 20px 60px rgba(0,0,0,.18);
-      backdrop-filter:blur(15px);
-    }
-
-    .card-icon{
-      width:48px;
-      height:48px;
-      display:grid;
-      place-items:center;
-      border-radius:15px;
-      background:rgba(53,229,244,.09);
-      border:1px solid rgba(53,229,244,.16);
-      color:var(--cyan);
-      font-size:22px;
-      margin-bottom:20px;
-    }
-
-    .card h3{
-      font-size:20px;
-      margin-bottom:10px;
-    }
-
-    .card p{
-      color:var(--muted);
-      line-height:1.7;
-      font-size:14px;
-    }
-
-    /* WORKFLOW */
-
-    .workflow{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:15px;
-    }
-
-    .step{
-      position:relative;
-      padding:25px;
-      border-radius:24px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.025);
-    }
-
-    .step-number{
-      color:var(--cyan);
-      font-weight:900;
-      font-size:14px;
-      margin-bottom:20px;
-    }
-
-    .step h3{
-      margin-bottom:9px;
-    }
-
-    .step p{
-      color:var(--muted);
-      line-height:1.65;
-      font-size:14px;
-    }
-
-    /* SHOWCASE */
-
-    .screens{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-      align-items:start;
-    }
-
-    .screen{
-      border:1px solid var(--line);
-      border-radius:26px;
-      padding:8px;
-      background:rgba(255,255,255,.03);
-      box-shadow:var(--shadow);
-    }
-
-    .screen img{
-      border-radius:20px;
-      width:100%;
-    }
-
-    /* DOWNLOAD */
-
-    .download-box{
-      position:relative;
-      overflow:hidden;
-      display:grid;
-      grid-template-columns:1fr 280px;
-      gap:35px;
-      align-items:center;
-      padding:45px;
-      border-radius:34px;
-      border:1px solid rgba(53,229,244,.18);
-      background:
-        radial-gradient(circle at 90% 20%,rgba(53,229,244,.14),transparent 35%),
-        linear-gradient(135deg,rgba(16,32,52,.9),rgba(5,10,18,.9));
-      box-shadow:var(--shadow);
-    }
-
-    .download-box h2{
-      margin-bottom:16px;
-    }
-
-    .download-box p{
-      color:var(--muted);
-      line-height:1.75;
-      margin-bottom:25px;
-    }
-
-    .download-points{
-      display:grid;
-      gap:10px;
-      margin-bottom:25px;
-      color:#cbd9e6;
-      font-size:14px;
-    }
-
-    .download-points span{
-      display:flex;
-      gap:8px;
-    }
-
-    .download-points b{
-      color:var(--green);
-    }
-
-    .qr-box{
-      padding:18px;
-      background:#fff;
-      border-radius:24px;
-      width:fit-content;
-      margin:auto;
-    }
-
-    .qr-box img{
-      width:220px;
-      height:220px;
-    }
-
-    /* LICENSE */
-
-    .license{
-      display:grid;
-      grid-template-columns:.8fr 1.2fr;
-      gap:20px;
-    }
-
-    .license-info,
-    .license-form{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:var(--r);
-      padding:32px;
-    }
-
-    .license-info p{
-      color:var(--muted);
-      line-height:1.75;
-      margin-bottom:20px;
-    }
-
-    .license-list{
-      display:grid;
-      gap:12px;
-    }
-
-    .license-list div{
-      padding:14px 16px;
-      border-radius:15px;
-      background:rgba(255,255,255,.035);
-      color:#cbd9e6;
-      font-size:14px;
-    }
-
-    form{
-      display:grid;
-      gap:14px;
-    }
-
-    .field{
-      display:grid;
-      gap:7px;
-    }
-
-    label{
-      font-size:13px;
-      font-weight:800;
-      color:#d8e5f1;
-    }
-
-    input,
-    textarea{
-      width:100%;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      color:#fff;
-      border-radius:14px;
-      padding:14px 15px;
-      outline:none;
-    }
-
-    input:focus,
-    textarea:focus{
-      border-color:rgba(53,229,244,.55);
-      box-shadow:0 0 0 3px rgba(53,229,244,.08);
-    }
-
-    textarea{
-      min-height:130px;
-      resize:vertical;
-    }
-
-    /* FAQ */
-
-    .faq{
-      display:grid;
-      gap:12px;
-      max-width:900px;
-    }
-
-    details{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.025);
-      border-radius:20px;
-      padding:20px 22px;
-    }
-
-    summary{
-      cursor:pointer;
-      font-weight:800;
-      list-style:none;
-    }
-
-    summary::-webkit-details-marker{
-      display:none;
-    }
-
-    details p{
-      color:var(--muted);
-      line-height:1.7;
-      padding-top:15px;
-      font-size:14px;
-    }
-
-    /* FOOTER */
-
-    footer{
-      border-top:1px solid var(--line);
-      padding:35px 0;
-      color:var(--muted);
-    }
-
-    .footer-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      flex-wrap:wrap;
-    }
-
-    .footer-brand{
-      color:#fff;
-      font-weight:900;
-    }
-
-    .copyright{
-      font-size:13px;
-    }
-
-    /* TOAST */
-
-    #toast{
-      position:fixed;
-      left:50%;
-      bottom:25px;
-      transform:translate(-50%,20px);
-      opacity:0;
-      pointer-events:none;
-      z-index:999;
-      background:#101d2c;
-      border:1px solid var(--line);
-      color:#fff;
-      padding:14px 18px;
-      border-radius:14px;
-      box-shadow:var(--shadow);
-      transition:.3s ease;
-      font-size:14px;
-      max-width:90%;
-      text-align:center;
-    }
-
-    #toast.show{
-      opacity:1;
-      transform:translate(-50%,0);
-    }
-
-    /* RESPONSIVE */
-
-    @media(max-width:900px){
-
-      .nav-links{
-        display:none;
-      }
-
-      .hero-grid{
-        grid-template-columns:1fr;
-      }
-
-      .phone{
-        max-width:340px;
-      }
-
-      .features{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .workflow{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .screens{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .download-box{
-        grid-template-columns:1fr;
-      }
-
-      .qr-box{
-        margin:0;
-      }
-
-      .license{
-        grid-template-columns:1fr;
-      }
-    }
-
-    @media(max-width:600px){
-
-      .container{
-        width:min(100% - 22px,1180px);
-      }
-
-      .hero{
-        padding-top:55px;
-      }
-
-      section{
-        padding:65px 0;
-      }
-
-      h1{
-        letter-spacing:-2.5px;
-      }
-
-      .hero-text{
-        font-size:16px;
-      }
-
-      .features,
-      .workflow,
-      .screens{
-        grid-template-columns:1fr;
-      }
-
-      .download-box{
-        padding:25px;
-      }
-
-      .license-info,
-      .license-form{
-        padding:24px;
-      }
-
-      .nav-inner{
-        min-height:68px;
-      }
-
-      .brand span{
-        font-size:17px;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#03060c">
+<title>Dr. İSG | Dijital İş Güvenliği</title>
+<meta name="description" content="Dr. İSG – Dijital İş Sağlığı ve Güvenliği Yönetim Sistemi">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#03060c;--bg2:#07111f;--panel:rgba(12,23,39,.72);
+--line:rgba(185,220,255,.14);--text:#f7fbff;--muted:#98aabd;
+--cyan:#35e5f4;--blue:#6689ff;--green:#56dfaa;--gold:#ffc76f;
+--r:28px;--shadow:0 35px 100px rgba(0,0,0,.5)
+}
+html{scroll-behavior:smooth}
+body{
+font-family:Inter,Segoe UI,Arial,sans-serif;
+background:
+radial-gradient(circle at 15% 10%,rgba(53,229,244,.10),transparent 28%),
+radial-gradient(circle at 85% 20%,rgba(102,137,255,.12),transparent 30%),
+linear-gradient(180deg,var(--bg),var(--bg2));
+color:var(--text);min-height:100vh;overflow-x:hidden
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{width:min(1180px,calc(100% - 32px));margin:auto}
+
+nav{
+position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);
+background:rgba(3,6,12,.82);border-bottom:1px solid var(--line)
+}
+.nav-inner{
+min-height:78px;display:flex;align-items:center;
+justify-content:space-between;gap:20px
+}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900}
+.brand img{width:44px;height:44px;border-radius:13px;object-fit:cover}
+.brand span{font-size:19px}
+.nav-links{display:flex;gap:24px;color:var(--muted);font-size:14px;font-weight:700}
+.nav-links a:hover{color:#fff}
+
+.btn{
+display:inline-flex;align-items:center;justify-content:center;gap:9px;
+min-height:48px;padding:0 20px;border-radius:15px;
+border:1px solid var(--line);font-weight:800;cursor:pointer;
+transition:.25s ease
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{
+color:#021015;background:linear-gradient(135deg,var(--cyan),#86f4ff);
+border-color:transparent;box-shadow:0 14px 35px rgba(53,229,244,.18)
+}
+.btn.secondary{background:rgba(255,255,255,.04);color:#fff}
+
+.hero{padding:90px 0 60px}
+.hero-grid{
+display:grid;grid-template-columns:1.08fr .92fr;
+align-items:center;gap:55px
+}
+.eyebrow{
+display:inline-flex;align-items:center;gap:9px;padding:8px 13px;
+border:1px solid rgba(53,229,244,.2);background:rgba(53,229,244,.06);
+color:var(--cyan);border-radius:999px;font-size:12px;font-weight:900;
+letter-spacing:.6px;margin-bottom:22px
+}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
+h1{font-size:clamp(44px,6vw,78px);line-height:.96;letter-spacing:-4px;margin-bottom:25px}
+h1 span{
+background:linear-gradient(135deg,#fff,var(--cyan),#9aaeff);
+-webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero-text{max-width:670px;color:var(--muted);font-size:18px;line-height:1.75;margin-bottom:30px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+.trust{display:flex;flex-wrap:wrap;gap:18px;color:#b9c9d8;font-size:13px}
+.trust span{display:flex;align-items:center;gap:7px}
+.trust b{color:var(--green)}
+
+.phone-wrap{position:relative}
+.phone-glow{
+position:absolute;inset:15% 8%;
+background:radial-gradient(circle,rgba(53,229,244,.22),transparent 62%);
+filter:blur(30px)
+}
+.phone{
+position:relative;width:min(390px,100%);margin:auto;padding:10px;
+border-radius:38px;background:linear-gradient(145deg,#18283b,#05090f);
+border:1px solid rgba(255,255,255,.12);box-shadow:var(--shadow)
+}
+.phone img{width:100%;border-radius:29px}
+
+section{padding:90px 0}
+.section-head{max-width:760px;margin-bottom:40px}
+.section-kicker{
+color:var(--cyan);font-weight:900;font-size:13px;
+letter-spacing:1px;text-transform:uppercase;margin-bottom:12px
+}
+h2{font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacing:-2px;margin-bottom:15px}
+.section-head p{color:var(--muted);line-height:1.75;font-size:16px}
+
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{
+background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.18)
+}
+.card-icon{
+width:48px;height:48px;display:grid;place-items:center;border-radius:15px;
+background:rgba(53,229,244,.09);border:1px solid rgba(53,229,244,.16);
+color:var(--cyan);font-size:22px;margin-bottom:20px
+}
+.card h3{font-size:20px;margin-bottom:10px}
+.card p{color:var(--muted);line-height:1.7;font-size:14px}
+
+.workflow{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.step{
+padding:25px;border-radius:24px;border:1px solid var(--line);
+background:rgba(255,255,255,.025)
+}
+.step-number{color:var(--cyan);font-weight:900;font-size:14px;margin-bottom:20px}
+.step h3{margin-bottom:9px}
+.step p{color:var(--muted);line-height:1.65;font-size:14px}
+
+.screens{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.screen{
+border:1px solid var(--line);border-radius:26px;padding:8px;
+background:rgba(255,255,255,.03);box-shadow:var(--shadow)
+}
+.screen img{border-radius:20px;width:100%}
+
+.download-box{
+display:grid;grid-template-columns:1fr 280px;gap:35px;align-items:center;
+padding:45px;border-radius:34px;border:1px solid rgba(53,229,244,.18);
+background:
+radial-gradient(circle at 90% 20%,rgba(53,229,244,.14),transparent 35%),
+linear-gradient(135deg,rgba(16,32,52,.9),rgba(5,10,18,.9));
+box-shadow:var(--shadow)
+}
+.download-box p{color:var(--muted);line-height:1.75;margin-bottom:25px}
+.download-points{display:grid;gap:10px;margin-bottom:25px;color:#cbd9e6;font-size:14px}
+.download-points span{display:flex;gap:8px}
+.download-points b{color:var(--green)}
+.qr-box{padding:18px;background:#fff;border-radius:24px;width:fit-content;margin:auto}
+.qr-box img{width:220px;height:220px}
+
+.license{display:grid;grid-template-columns:.8fr 1.2fr;gap:20px}
+.license-info,.license-form{
+background:var(--panel);border:1px solid var(--line);
+border-radius:var(--r);padding:32px
+}
+.license-info p{color:var(--muted);line-height:1.75;margin-bottom:20px}
+.license-list{display:grid;gap:12px}
+.license-list div{
+padding:14px 16px;border-radius:15px;background:rgba(255,255,255,.035);
+color:#cbd9e6;font-size:14px
+}
+form{display:grid;gap:14px}
+.field{display:grid;gap:7px}
+label{font-size:13px;font-weight:800;color:#d8e5f1}
+input,textarea{
+width:100%;border:1px solid var(--line);background:rgba(0,0,0,.18);
+color:#fff;border-radius:14px;padding:14px 15px;outline:none
+}
+input:focus,textarea:focus{
+border-color:rgba(53,229,244,.55);
+box-shadow:0 0 0 3px rgba(53,229,244,.08)
+}
+textarea{min-height:130px;resize:vertical}
+
+.faq{display:grid;gap:12px;max-width:900px}
+details{
+border:1px solid var(--line);background:rgba(255,255,255,.025);
+border-radius:20px;padding:20px 22px
+}
+summary{cursor:pointer;font-weight:800;list-style:none}
+summary::-webkit-details-marker{display:none}
+details p{color:var(--muted);line-height:1.7;padding-top:15px;font-size:14px}
+
+footer{border-top:1px solid var(--line);padding:35px 0;color:var(--muted)}
+.footer-inner{
+display:flex;align-items:center;justify-content:space-between;
+gap:20px;flex-wrap:wrap
+}
+.footer-brand{color:#fff;font-weight:900}
+.copyright{font-size:13px}
+
+@media(max-width:900px){
+.nav-links{display:none}
+.hero-grid{grid-template-columns:1fr}
+.phone{max-width:340px}
+.features{grid-template-columns:1fr 1fr}
+.workflow{grid-template-columns:1fr 1fr}
+.screens{grid-template-columns:1fr 1fr}
+.download-box{grid-template-columns:1fr}
+.qr-box{margin:0}
+.license{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+.container{width:min(100% - 22px,1180px)}
+.hero{padding-top:55px}
+section{padding:65px 0}
+h1{letter-spacing:-2.5px}
+.hero-text{font-size:16px}
+.features,.workflow,.screens{grid-template-columns:1fr}
+.download-box{padding:25px}
+.license-info,.license-form{padding:24px}
+.nav-inner{min-height:68px}
+.brand span{font-size:17px}
+}
+</style>
 </head>
 
 <body>
 
-  <nav>
-    <div class="container nav-inner">
-
-      <a class="brand" href="#top">
-        <img src="assets/app-icon.jpg" alt="Dr. İSG">
-        <span>Dr. İSG</span>
-      </a>
-
-      <div class="nav-links">
-        <a href="#ozellikler">Özellikler</a>
-        <a href="#akis">Nasıl Çalışır?</a>
-        <a href="#indir">APK</a>
-        <a href="#lisans">Lisans</a>
-        <a href="#sss">SSS</a>
-      </div>
-
-      <!-- APK bağlantısı düzeltildi -->
-      <a
-        class="btn primary"
-        href="https://github.com/drisgpremium/drisg/releases/download/v1.0.2/Dr-ISG.apk">
-        APK'yı İndir ↓
-      </a>
-
-    </div>
-  </nav>
-
-  <main id="top">
-
-    <!-- HERO -->
-
-    <section class="hero">
-      <div class="container hero-grid">
-
-        <div>
-
-          <div class="eyebrow">
-            <span class="dot"></span>
-            DİJİTAL İŞ SAĞLIĞI VE GÜVENLİĞİ
-          </div>
-
-          <h1>
-            İSG'yi
-            <span>geleceğe taşıyın.</span>
-          </h1>
-
-          <p class="hero-text">
-            Dr. İSG; iş sağlığı ve güvenliği süreçlerini dijitalleştiren,
-            saha çalışmalarını kolaylaştıran ve işletmelerin İSG yönetimini
-            tek platformda düzenleyen modern bir mobil çözümdür.
-          </p>
-
-          <div class="hero-actions">
-
-            <!-- APK bağlantısı düzeltildi -->
-            <a
-              class="btn primary"
-              href="https://github.com/drisgpremium/drisg/releases/download/v1.0.2/Dr-ISG.apk">
-              Ücretsiz APK'yı İndir ↗
-            </a>
-
-            <a class="btn secondary" href="#ozellikler">
-              Sistemi Keşfet
-            </a>
-
-          </div>
-
-          <div class="trust">
-            <span><b>✓</b> Mobil kullanım</span>
-            <span><b>✓</b> Dijital İSG süreçleri</span>
-            <span><b>✓</b> Hızlı erişim</span>
-          </div>
-
-        </div>
-
-        <div class="phone-wrap">
-
-          <div class="phone-glow"></div>
-
-          <div class="phone">
-            <img
-              src="assets/screen-home-clean.jpg"
-              alt="Dr. İSG mobil uygulama ekranı">
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ÖZELLİKLER -->
-
-    <section id="ozellikler">
-      <div class="container">
-
-        <div class="section-head">
-          <div class="section-kicker">Dr. İSG</div>
-
-          <h2>
-            İSG süreçlerinizi
-            tek merkezden yönetin.
-          </h2>
-
-          <p>
-            Saha çalışmalarından sözleşmelere, eğitimlerden dokümantasyona
-            kadar birçok İSG sürecini mobil ve dijital bir yapıda takip edin.
-          </p>
-        </div>
-
-        <div class="features">
-
-          <div class="card">
-            <div class="card-icon">⚡</div>
-            <h3>Hızlı Saha Yönetimi</h3>
-            <p>
-              Saha çalışmalarınızı mobil cihaz üzerinden daha hızlı,
-              düzenli ve erişilebilir şekilde yönetin.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon">✓</div>
-            <h3>İSG Takibi</h3>
-            <p>
-              Riskler, kontroller, uygunsuzluklar ve yapılan çalışmalar
-              için merkezi bir takip altyapısı oluşturun.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon">▣</div>
-            <h3>Dijital Dokümantasyon</h3>
-            <p>
-              İSG süreçlerine ilişkin bilgilerinizi dijital ortamda
-              düzenli şekilde yönetmenize yardımcı olur.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon">◈</div>
-            <h3>Mobil Erişim</h3>
-            <p>
-              İşletmenizdeki İSG çalışmalarınıza mobil cihazınızdan
-              hızlı şekilde ulaşın.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon">⌁</div>
-            <h3>Sistematik Çalışma</h3>
-            <p>
-              Dağınık İSG işlemlerini daha sistematik bir dijital
-              çalışma düzenine taşıyın.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon">✦</div>
-            <h3>Modern İSG Deneyimi</h3>
-            <p>
-              Geleneksel süreçleri modern mobil teknolojilerle
-              daha erişilebilir hale getirin.
-            </p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- AKIŞ -->
-
-    <section id="akis">
-      <div class="container">
-
-        <div class="section-head">
-          <div class="section-kicker">Basit Akış</div>
-
-          <h2>
-            İSG yönetimi
-            daha kolay.
-          </h2>
-
-          <p>
-            Dr. İSG ile süreçlerinizi birkaç temel adımda dijital
-            çalışma düzenine taşıyabilirsiniz.
-          </p>
-        </div>
-
-        <div class="workflow">
-
-          <div class="step">
-            <div class="step-number">01</div>
-            <h3>İşletmenizi Tanımlayın</h3>
-            <p>
-              İşletmeye ilişkin temel bilgileri sisteme girin.
-            </p>
-          </div>
-
-          <div class="step">
-            <div class="step-number">02</div>
-            <h3>İSG Süreçlerini Yönetin</h3>
-            <p>
-              İSG çalışmalarınızı mobil ortamda takip edin.
-            </p>
-          </div>
-
-          <div class="step">
-            <div class="step-number">03</div>
-            <h3>Kontrol Edin</h3>
-            <p>
-              Yapılan çalışmaların ve açık işlemlerin takibini yapın.
-            </p>
-          </div>
-
-          <div class="step">
-            <div class="step-number">04</div>
-            <h3>Sisteminizi Geliştirin</h3>
-            <p>
-              Daha düzenli ve sürdürülebilir bir İSG yönetim sistemi oluşturun.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- EKRANLAR -->
-
-    <section>
-      <div class="container">
-
-        <div class="section-head">
-          <div class="section-kicker">Uygulamadan Görüntüler</div>
-
-          <h2>
-            İSG cebinizde.
-          </h2>
-
-          <p>
-            Dr. İSG'nin mobil arayüzünü inceleyin.
-          </p>
-        </div>
-
-        <div class="screens">
-
-          <div class="screen">
-            <img
-              src="assets/screen-home-clean.jpg"
-              alt="Dr. İSG ana ekran">
-          </div>
-
-          <div class="screen">
-            <img
-              src="assets/screen-service-clean.jpg"
-              alt="Dr. İSG hizmet ekranı">
-          </div>
-
-          <div class="screen">
-            <img
-              src="assets/screen-contract-clean.jpg"
-              alt="Dr. İSG sözleşme ekranı">
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- DOWNLOAD -->
-
-    <section id="indir">
-      <div class="container">
-
-        <div class="download-box">
-
-          <div>
-
-            <div class="section-kicker">
-              ANDROID UYGULAMA
-            </div>
-
-            <h2>
-              Dr. İSG'yi şimdi deneyin.
-            </h2>
-
-            <p>
-              Android cihazınıza Dr. İSG uygulamasını indirerek
-              İSG süreçlerinizi mobil ortamda yönetmeye başlayın.
-            </p>
-
-            <div class="download-points">
-              <span><b>✓</b> Android APK</span>
-              <span><b>✓</b> Hızlı indirme</span>
-              <span><b>✓</b> Mobil kullanım</span>
-              <span><b>✓</b> Güncel sürüm: v1.0.2</span>
-            </div>
-
-            <!-- APK bağlantısı düzeltildi -->
-            <a
-              class="btn primary"
-              href="https://github.com/drisgpremium/drisg/releases/download/v1.0.2/Dr-ISG.apk">
-              APK'yı İndir ↗
-            </a>
-
-          </div>
-
-          <div class="qr-box">
-
-            <img
-              id="qrImage"
-              alt="Dr. İSG APK QR kodu">
-
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- LİSANS -->
-
-    <section id="lisans">
-      <div class="container">
-
-        <div class="section-head">
-          <div class="section-kicker">Kurumsal Lisans</div>
-
-          <h2>
-            İşletmeniz için
-            lisans talebi oluşturun.
-          </h2>
-
-          <p>
-            Kurumsal kullanım ve lisanslama seçenekleri hakkında
-            bilgi almak için formu doldurabilirsiniz.
-          </p>
-        </div>
-
-        <div class="license">
-
-          <div class="license-info">
-
-            <h3 style="font-size:25px;margin-bottom:15px;">
-              Dr. İSG Kurumsal
-            </h3>
-
-            <p>
-              İşletmenizin ihtiyaçlarına göre dijital İSG süreçlerinin
-              planlanması ve yönetimi için iletişime geçebilirsiniz.
-            </p>
-
-            <div class="license-list">
-
-              <div>
-                ✓ Kurumsal kullanım
-              </div>
-
-              <div>
-                ✓ Lisanslama seçenekleri
-              </div>
-
-              <div>
-                ✓ İşletmeye özel değerlendirme
-              </div>
-
-              <div>
-                ✓ Dijital İSG çözümü
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="license-form">
-
-            <form
-              id="licenseForm"
-              action="https://formsubmit.co/ajax/drisgpremium@gmail.com"
-              method="POST">
-
-              <input
-                type="hidden"
-                name="_subject"
-                value="Dr. İSG Kurumsal Lisans Talebi">
-
-              <input
-                type="hidden"
-                name="_captcha"
-                value="false">
-
-              <input
-                type="hidden"
-                name="_template"
-                value="table">
-
-              <div class="field">
-
-                <label for="name">
-                  Ad Soyad
-                </label>
-
-                <input
-                  id="name"
-                  name="Ad Soyad"
-                  type="text"
-                  placeholder="Adınız ve soyadınız"
-                  required>
-
-              </div>
-
-              <div class="field">
-
-                <label for="company">
-                  Kurum / İşletme
-                </label>
-
-                <input
-                  id="company"
-                  name="Kurum / İşletme"
-                  type="text"
-                  placeholder="Kurum veya işletme adı"
-                  required>
-
-              </div>
-
-              <div class="field">
-
-                <label for="email">
-                  E-posta
-                </label>
-
-                <input
-                  id="email"
-                  name="E-posta"
-                  type="email"
-                  placeholder="ornek@firma.com"
-                  required>
-
-              </div>
-
-              <div class="field">
-
-                <label for="phone">
-                  Telefon
-                </label>
-
-                <input
-                  id="phone"
-                  name="Telefon"
-                  type="tel"
-                  placeholder="05xx xxx xx xx">
-
-              </div>
-
-              <div class="field">
-
-                <label for="message">
-                  Mesaj
-                </label>
-
-                <textarea
-                  id="message"
-                  name="Mesaj"
-                  placeholder="Lisans talebiniz veya bilgi almak istediğiniz konu..."></textarea>
-
-              </div>
-
-              <button
-                class="btn primary"
-                type="submit">
-                Lisans Talebi Gönder ↗
-              </button>
-
-            </form>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- SSS -->
-
-    <section id="sss">
-      <div class="container">
-
-        <div class="section-head">
-          <div class="section-kicker">
-            Sık Sorulan Sorular
-          </div>
-
-          <h2>
-            Merak edilenler.
-          </h2>
-        </div>
-
-        <div class="faq">
-
-          <details>
-            <summary>
-              Dr. İSG nedir?
-            </summary>
-
-            <p>
-              Dr. İSG, iş sağlığı ve güvenliği süreçlerinin dijital
-              ortamda yönetilmesine yardımcı olan mobil bir uygulamadır.
-            </p>
-          </details>
-
-
-          <details>
-            <summary>
-              Android telefona nasıl kurabilirim?
-            </summary>
-
-            <p>
-              APK'yı indirdikten sonra bildirim çubuğundan veya
-              İndirilenler klasöründen <strong>Dr-ISG.apk</strong>
-              dosyasına dokunun. Android'in gösterdiği kurulum
-              ekranından yüklemeyi tamamlayabilirsiniz.
-            </p>
-          </details>
-
-
-          <details>
-            <summary>
-              APK neden Google Play'de değil?
-            </summary>
-
-            <p>
-              Bu sürüm doğrudan APK olarak sunulmaktadır.
-              İndirme işlemi GitHub üzerinden gerçekleştirilir.
-            </p>
-          </details>
-
-
-          <details>
-            <summary>
-              Uygulama ücretsiz mi?
-            </summary>
-
-            <p>
-              Uygulamanın sunulan sürümünü ücretsiz olarak
-              deneyebilirsiniz. Kurumsal kullanım ve lisanslama
-              seçenekleri için iletişim formunu kullanabilirsiniz.
-            </p>
-          </details>
-
-
-          <details>
-            <summary>
-              Kurumsal lisans alabilir miyim?
-            </summary>
-
-            <p>
-              Evet. Kurumsal kullanım ve lisanslama seçenekleri
-              için lisans talep formunu doldurabilirsiniz.
-            </p>
-          </details>
-
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-
-  <!-- FOOTER -->
-
-  <footer>
-
-    <div class="container footer-inner">
-
-      <div>
-        <div class="footer-brand">
-          Dr. İSG
-        </div>
-
-        <div class="copyright">
-          Dijital İş Sağlığı ve Güvenliği
-        </div>
-      </div>
-
-      <div class="copyright">
-        © 2026 Dr. İSG. Tüm hakları saklıdır.
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <div id="toast"></div>
-
-
-  <script>
-
-    /* --------------------------------------------------
-       APK SABİT ADRES
-       -------------------------------------------------- */
-
-    const APK_URL =
-      "https://github.com/drisgpremium/drisg/releases/download/v1.0.2/Dr-ISG.apk";
-
-
-    /* --------------------------------------------------
-       QR KOD
-       -------------------------------------------------- */
-
-    const qrImage = document.getElementById("qrImage");
-
-    if(qrImage){
-
-      qrImage.src =
-        "https://api.qrserver.com/v1/create-qr-code/?size=260x260&data="
-        + encodeURIComponent(APK_URL);
-
-    }
-
-
-    /* --------------------------------------------------
-       TOAST
-       -------------------------------------------------- */
-
-    function showToast(message){
-
-      const toast =
-        document.getElementById("toast");
-
-      if(!toast) return;
-
-      toast.textContent = message;
-
-      toast.classList.add("show");
-
-      setTimeout(function(){
-
-        toast.classList.remove("show");
-
-      },3500);
-
-    }
-
-
-    /* --------------------------------------------------
-       LİSANS FORMU
-       -------------------------------------------------- */
-
-    const licenseForm =
-      document.getElementById("licenseForm");
-
-
-    if(licenseForm){
-
-      licenseForm.addEventListener("submit",async function(e){
-
-        e.preventDefault();
-
-        const button =
-          licenseForm.querySelector("button[type='submit']");
-
-        const oldText =
-          button.textContent;
-
-        button.disabled = true;
-
-        button.textContent =
-          "Gönderiliyor...";
-
-
-        try{
-
-          const formData =
-            new FormData(licenseForm);
-
-          const response =
-            await fetch(licenseForm.action,{
-
-              method:"POST",
-
-              body:formData,
-
-              headers:{
-                "Accept":"application/json"
-              }
-
-            });
-
-
-          if(response.ok){
-
-            licenseForm.reset();
-
-            showToast(
-              "Lisans talebiniz başarıyla gönderildi."
-            );
-
-          }else{
-
-            showToast(
-              "Gönderim sırasında bir sorun oluştu."
-            );
-
-          }
-
-        }catch(error){
-
-          showToast(
-            "Bağlantı hatası oluştu. Lütfen tekrar deneyin."
-          );
-
-        }finally{
-
-          button.disabled = false;
-
-          button.textContent =
-            oldText;
-
-        }
-
-      });
-
-    }
-
-
-    /* --------------------------------------------------
-       APK BUTONLARINA EK GÜVENLİK
-       -------------------------------------------------- */
-
-    document.querySelectorAll(
-      'a[href*="Dr-ISG.apk"]'
-    ).forEach(function(link){
-
-      link.addEventListener("click",function(){
-
-        showToast(
-          "Dr-İSG APK indiriliyor..."
-        );
-
-      });
-
-    });
-
-  </script>
+<nav>
+<div class="container nav-inner">
+
+<a class="brand" href="#top">
+<img src="assets/app-icon.jpg" alt="Dr. İSG">
+<span>Dr. İSG</span>
+</a>
+
+<div class="nav-links">
+<a href="#ozellikler">Özellikler</a>
+<a href="#akis">Nasıl Çalışır?</a>
+<a href="#indir">APK</a>
+<a href="#lisans">Lisans</a>
+<a href="#sss">SSS</a>
+</div>
+
+<a class="btn primary"
+href="https://github.com/drisgpremium/drisg/releases/download/v1.0.2/Dr-ISG.apk">
+APK'yı İndir ↓
+</a>
+
+</div>
+</nav>
+
+<main id="top">
+
+<section class="hero">
+<div class="container hero-grid">
+
+<div>
+
+<div class="eyebrow">
+<span class="dot"></span>
+DİJİTAL İŞ SAĞLIĞI VE GÜVENLİĞİ
+</div>
+
+<h1>
+İSG'yi
+<span>geleceğe taşıyın.</span>
+</h1>
+
+<p class="hero-text">
+Dr. İSG; iş sağlığı ve güvenliği süreçlerini dijitalleştiren,
+saha çalışmalarını kolaylaştıran ve işletmelerin İSG yönetimini
+tek platformda düzenleyen modern bir mobil çözümdür.
+</p>
+
+<div class="hero-actions">
+
+<a class="btn primary"
+href="https://github.com/drisgpremium/drisg/releases/download/v1.0.2/Dr-ISG.apk">
+Ücretsiz APK'yı İndir ↗
+</a>
+
+<a class="btn secondary" href="#ozellikler">
+Sistemi Keşfet
+</a>
+
+</div>
+
+<div class="trust">
+<span><b>✓</b> Mobil kullanım</span>
+<span><b>✓</b> Dijital İSG süreçleri</span>
+<span><b>✓</b> Hızlı erişim</span>
+</div>
+
+</div>
+
+<div class="phone-wrap">
+<div class="phone-glow"></div>
+<div class="phone">
+<img src="assets/screen-home-clean.jpg" alt="Dr. İSG mobil uygulama ekranı">
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="ozellikler">
+<div class="container">
+
+<div class="section-head">
+<div class="section-kicker">Dr. İSG</div>
+<h2>İSG süreçlerinizi tek merkezden yönetin.</h2>
+<p>
+Saha çalışmalarından sözleşmelere, eğitimlerden dokümantasyona
+kadar birçok İSG sürecini mobil ve dijital bir yapıda takip edin.
+</p>
+</div>
+
+<div class="features">
+
+<div class="card">
+<div class="card-icon">⚡</div>
+<h3>Hızlı Saha Yönetimi</h3>
+<p>Saha çalışmalarınızı mobil cihaz üzerinden daha hızlı ve düzenli yönetin.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">✓</div>
+<h3>İSG Takibi</h3>
+<p>Riskler, kontroller, uygunsuzluklar ve yapılan çalışmalar için merkezi takip.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">▣</div>
+<h3>Dijital Dokümantasyon</h3>
+<p>İSG süreçlerine ilişkin bilgilerinizi dijital ortamda düzenli şekilde yönetin.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">◈</div>
+<h3>Mobil Erişim</h3>
+<p>İSG çalışmalarınıza mobil cihazınızdan hızlı şekilde ulaşın.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">⌁</div>
+<h3>Sistematik Çalışma</h3>
+<p>Dağınık İSG işlemlerini sistematik dijital çalışma düzenine taşıyın.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">✦</div>
+<h3>Modern İSG Deneyimi</h3>
+<p>Geleneksel süreçleri modern mobil teknolojilerle daha erişilebilir hale getirin.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="akis">
+<div class="container">
+
+<div class="section-head">
+<div class="section-kicker">Basit Akış</div>
+<h2>İSG yönetimi daha kolay.</h2>
+<p>Dr. İSG ile süreçlerinizi birkaç temel adımda dijital çalışma düzenine taşıyabilirsiniz.</p>
+</div>
+
+<div class="workflow">
+
+<div class="step">
+<div class="step-number">01</div>
+<h3>İşletmenizi Tanımlayın</h3>
+<p>İşletmeye ilişkin temel bilgileri sisteme girin.</p>
+</div>
+
+<div class="step">
+<div class="step-number">02</div>
+<h3>İSG Süreçlerini Yönetin</h3>
+<p>İSG çalışmalarınızı mobil ortamda takip edin.</p>
+</div>
+
+<div class="step">
+<div class="step-number">03</div>
+<h3>Kontrol Edin</h3>
+<p>Yapılan çalışmaların ve açık işlemlerin takibini yapın.</p>
+</div>
+
+<div class="step">
+<div class="step-number">04</div>
+<h3>Sisteminizi Geliştirin</h3>
+<p>Daha düzenli ve sürdürülebilir bir İSG yönetim sistemi oluşturun.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+
+<div class="section-head">
+<div class="section-kicker">Uygulamadan Görüntüler</div>
+<h2>İSG cebinizde.</h2>
+<p>Dr. İSG'nin mobil arayüzünü inceleyin.</p>
+</div>
+
+<div class="screens">
+
+<div class="screen">
+<img src="assets/screen-home-clean.jpg" alt="Dr. İSG ana ekran">
+</div>
+
+<div class="screen">
+<img src="assets/screen-service-clean.jpg" alt="Dr. İSG hizmet ekranı">
+</div>
+
+<div class="screen">
+<img src="assets/screen-contract-clean.jpg" alt="Dr. İSG sözleşme ekranı">
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="indir">
+<div class="container">
+
+<div class="download-box">
+
+<div>
+
+<div class="section-kicker">ANDROID UYGULAMA</div>
+
+<h2>Dr. İSG'yi şimdi deneyin.</h2>
+
+<p>
+Android cihazınıza Dr. İSG uygulamasını indirerek
+İSG süreçlerinizi mobil ortamda yönetmeye başlayın.
+</p>
+
+<div class="download-points">
+<span><b>✓</b> Android APK</span>
+<span><b>✓</b> Doğrudan indirme</span>
+<span><b>✓</b> Mobil kullanım</span>
+<span><b>✓</b> Güncel sürüm: v1.0.2</span>
+</div>
+
+<a class="btn primary"
+href="https://github.com/drisgpremium/drisg/releases/download/v1.0.2/Dr-ISG.apk">
+APK'yı İndir ↗
+</a>
+
+</div>
+
+<div class="qr-box">
+<img
+src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https%3A%2F%2Fgithub.com%2Fdrisgpremium%2Fdrisg%2Freleases%2Fdownload%2Fv1.0.2%2FDr-ISG.apk"
+alt="Dr. İSG APK QR kodu">
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="lisans">
+<div class="container">
+
+<div class="section-head">
+<div class="section-kicker">Kurumsal Lisans</div>
+<h2>İşletmeniz için lisans talebi oluşturun.</h2>
+<p>
+Kurumsal kullanım ve lisanslama seçenekleri hakkında bilgi almak için formu doldurabilirsiniz.
+</p>
+</div>
+
+<div class="license">
+
+<div class="license-info">
+
+<h3 style="font-size:25px;margin-bottom:15px;">
+Dr. İSG Kurumsal
+</h3>
+
+<p>
+İşletmenizin ihtiyaçlarına göre dijital İSG süreçlerinin
+planlanması ve yönetimi için iletişime geçebilirsiniz.
+</p>
+
+<div class="license-list">
+<div>✓ Kurumsal kullanım</div>
+<div>✓ Lisanslama seçenekleri</div>
+<div>✓ İşletmeye özel değerlendirme</div>
+<div>✓ Dijital İSG çözümü</div>
+</div>
+
+</div>
+
+<div class="license-form">
+
+<form
+action="https://formsubmit.co/ajax/drisgpremium@gmail.com"
+method="POST">
+
+<input type="hidden" name="_subject" value="Dr. İSG Kurumsal Lisans Talebi">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
+
+<div class="field">
+<label for="name">Ad Soyad</label>
+<input id="name" name="Ad Soyad" type="text" placeholder="Adınız ve soyadınız" required>
+</div>
+
+<div class="field">
+<label for="company">Kurum / İşletme</label>
+<input id="company" name="Kurum / İşletme" type="text" placeholder="Kurum veya işletme adı" required>
+</div>
+
+<div class="field">
+<label for="email">E-posta</label>
+<input id="email" name="E-posta" type="email" placeholder="ornek@firma.com" required>
+</div>
+
+<div class="field">
+<label for="phone">Telefon</label>
+<input id="phone" name="Telefon" type="tel" placeholder="05xx xxx xx xx">
+</div>
+
+<div class="field">
+<label for="message">Mesaj</label>
+<textarea id="message" name="Mesaj" placeholder="Lisans talebiniz veya bilgi almak istediğiniz konu..."></textarea>
+</div>
+
+<button class="btn primary" type="submit">
+Lisans Talebi Gönder ↗
+</button>
+
+</form>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="sss">
+<div class="container">
+
+<div class="section-head">
+<div class="section-kicker">Sık Sorulan Sorular</div>
+<h2>Merak edilenler.</h2>
+</div>
+
+<div class="faq">
+
+<details>
+<summary>Dr. İSG nedir?</summary>
+<p>
+Dr. İSG, iş sağlığı ve güvenliği süreçlerinin dijital ortamda yönetilmesine yardımcı olan mobil bir uygulamadır.
+</p>
+</details>
+
+<details>
+<summary>Android telefona nasıl kurabilirim?</summary>
+<p>
+APK'yı indirdikten sonra bildirim çubuğundan veya İndirilenler klasöründen
+<strong>Dr-ISG.apk</strong> dosyasına dokunun. Android'in gösterdiği kurulum
+ekranından yüklemeyi tamamlayabilirsiniz.
+</p>
+</details>
+
+<details>
+<summary>APK neden Google Play'de değil?</summary>
+<p>
+Bu sürüm doğrudan APK olarak sunulmaktadır. İndirme işlemi GitHub üzerinden gerçekleştirilir.
+</p>
+</details>
+
+<details>
+<summary>Uygulama ücretsiz mi?</summary>
+<p>
+Uygulamanın sunulan sürümünü ücretsiz olarak deneyebilirsiniz.
+Kurumsal kullanım ve lisanslama seçenekleri için iletişim formunu kullanabilirsiniz.
+</p>
+</details>
+
+<details>
+<summary>Kurumsal lisans alabilir miyim?</summary>
+<p>
+Evet. Kurumsal kullanım ve lisanslama seçenekleri için lisans talep formunu doldurabilirsiniz.
+</p>
+</details>
+
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="container footer-inner">
+
+<div>
+<div class="footer-brand">Dr. İSG</div>
+<div class="copyright">Dijital İş Sağlığı ve Güvenliği</div>
+</div>
+
+<div class="copyright">
+© 2026 Dr. İSG. Tüm hakları saklıdır.
+</div>
+
+</div>
+</footer>
 
 </body>
 </html>
